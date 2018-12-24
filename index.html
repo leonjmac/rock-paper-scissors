@@ -1,0 +1,153 @@
+<!--DOCTYPE html-->
+<html lang="en-GB">
+	<head>
+		<meta charset="utf-8">
+		<title>RPS - Shoot!</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			/// Javascript implementation of rock, paper, scissors
+
+			// Variables used to keep track of the overall score	
+			var playerScore = 0
+			var computerScore = 0
+
+			// Constants used for comparisons
+			let rock = "rock"
+			let paper = "paper"
+			let scissors = "scissors"
+
+			let rock_val = 0
+			let paper_val = 1
+			let scissors_val = 2
+
+
+			/// Helper functions
+
+			// Creates a string with the first character capitilised
+			// Returns STRING
+			function capitaliseWord(word) {
+				// Compares length to less than "3" as JS considers "\n" as a character so "A" has a length of "2"
+				return (word.length < 3) ? word[0].toUpperCase() : word[0].toUpperCase() + word.substr(1, word.length-1)
+			}
+
+			// Creates a random integer between 0 and the (max)imum number specified
+			// Returns INTERGER
+			function generateRandomInteger(max) {
+				return Math.floor(Math.random() * Math.floor(max))
+			}
+
+			// Checks if the move (string) supplied is a valid
+			// Returns BOOLEAN
+			function isValidMove(move) {
+				return (move == rock || move == paper || move == scissors)
+			}
+
+			// Presents alert to user if invalid input is entered
+			function throwUserInputError(val) {
+				alert(`Whoops - you entered \"${val}\". Please enter please type \"${capitaliseWord(rock)}\", \"${capitaliseWord(paper)}\" or \"${capitaliseWord(scissors)}\" to play.`)
+			}
+
+			// Converts the value supplied (as an integer) to it's string representation
+			// Returns STRING
+			function getMoveString(val) {
+				var move = ""
+				switch(val) {
+					case rock_val:
+						move = rock
+						break;
+					case paper_val:
+						move = paper;
+						break;
+					case scissors_val:
+						move = scissors
+						break;
+					default:
+						move = "Undefined"
+				}
+				return move
+			}
+
+			/// Core game functions
+
+			// Randomly generates move for the computer
+			// Returns STRING
+			function computerSelection() {
+				return getMoveString(generateRandomInteger(3))
+			}
+
+			// Prompts user to enter a legal value to play the game
+			// Returns STRING
+			function playerSelection() {
+				var move = ""
+				var validMove = false
+
+				while (!validMove) {
+					move = prompt("Make your choice - please type \"Rock\", \"Paper\" or \"Scissors\" to play:")
+					move = move.toLowerCase().trim()
+					validMove = isValidMove(move)
+					
+					// If invalid, present to the user what they entered
+					if (!validMove) {
+						throwUserInputError(move)
+					}
+				}
+				return move
+			}
+
+			// Contains the logic to see who wins the round and updates the scores as appropriate. 
+			// Returns STRING 
+			function playRound(playerSelection, computerSelection) {
+				var outcome = ""
+
+				// Same move? It's a draw
+				if (playerSelection == computerSelection) {
+					outcome = `Dang! It\'s a draw! You both had ${computerSelection}.`
+				} else {
+					// Scenarios for a player victory
+					if ((playerSelection == rock && computerSelection == scissors)||(playerSelection == paper && computerSelection == rock)||(playerSelection == scissors && computerSelection == paper)) {
+						outcome = `You win! ${capitaliseWord(playerSelection)} beats ${computerSelection}!`
+						playerScore++
+					// Anything else means the computer won	
+					} else {
+						outcome = `Uh oh - you Lose! ${capitaliseWord(computerSelection)} beats ${playerSelection}!`
+						computerScore++
+					}
+				}
+				return outcome
+			}
+
+			// Presents final score with custom message depending on outcome to the console
+			function displayScore() {
+				var msg = ""
+				if (playerScore > computerScore) {
+					msg = "Congratualations! You won the battle... but the war ain\'t over!"
+				} else if (computerScore > playerScore) {
+					msg = "You lost! Better luck next time but remember... mistakes are good, it\'s how we learn."
+				} else {
+					msg = "Unbelievable - it\'s a tie (fighter). A rematch is definitely on the cards."
+				}
+
+				console.log(`${msg}\nYou scored: ${playerScore} || Computer scored: ${computerScore}`)
+			}
+
+			// Contains logic to run the game
+			function game() {
+				let numOfRounds = 5
+
+				// Present alert to prompt user to open console to play game
+				alert(`Welcome to ${capitaliseWord(rock)}, ${capitaliseWord(paper)}, ${capitaliseWord(scissors)} - shoot!\n\nTo view your progress, please open the console in your browser.`)
+
+				for (var i = 0; i < numOfRounds; i++){
+					let playerMove = playerSelection()
+					let computerMove = computerSelection()
+					console.log(playRound(playerMove, computerMove))
+				}
+				displayScore()
+			}
+			// Ensure interface is presented when page loads
+			document.addEventListener("DOMContentLoaded", game)
+
+		</script>
+	</body>
+</html>
