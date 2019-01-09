@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css?family=Dosis|Hind');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-transform: uppercase;
+    font-family: 'Dosis', sans-serif;
+    font-weight: 300;
+}
+
+html {
+    background-color: #FFEA00;
+    color: #221111;
+    text-align: center;
+}
+
+
+/* Reuseable components */
+.row {
+    width: 1140px;
+    margin: 0 auto;
+}
+
+.is_hidden {
+    display: none;
+}
+
+.span_1_of_3 {
+    float: left;
+    width: 32.33%;
+}
+
+.span_1_of_5 {
+    float: left;
+    width: 20%;
+}
+
+.span_2_of_5 {
+    float: left;
+    width: 40%;
+}
+
+.span_2_of_9 {
+    float: left;
+    width: 22.21%;
+}
+
+.span_5_of_9 {
+    float: left;
+    width: 55.57%;
+}
+
+.clearfix {
+    clear: both;
+}
+
+/* Copy formatting */
+h1 {
+    font-size: 500%;
+    margin-bottom: 28px;
+}
+
+h2 {
+    font-size: 350%;
+    margin-bottom: 22px;
+    font-weight: 500;
+}
+
+.score p {
+    font-size: 300%;
+}
+
+.game_outcome_screen p {
+    margin: 40px auto;
+    font-size: 200%;
+}
+
+/* Layout controls */
+.container {
+    margin-top: 10%;
+}
+
+button {
+    font-size: 400%;
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+
+.ui_buttons button {
+    margin: 5px;
+    border: 10px solid #221111;
+    height: 300px;    
+}
+
+#reset_button {
+    padding: 10px;
+    margin-top: 40px;
+    border: 6px solid #221111;
+}
+
+.round_outcome_screen img {
+    margin: 0 auto;
+    display: inline-block;
+}
+
